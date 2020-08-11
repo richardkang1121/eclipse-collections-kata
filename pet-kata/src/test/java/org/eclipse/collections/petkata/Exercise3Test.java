@@ -67,7 +67,7 @@ public class Exercise3Test extends PetDomainForKata
         Assert.assertEquals(Integer.valueOf(1), petTypeCounts.get(PetType.BIRD));
 
         // Hint: use the appropriate method on this.people to create a Bag<PetType>
-        Bag<PetType> counts = null;
+        Bag<PetType> counts = petTypes.toBag();
         Assert.assertEquals(2, counts.occurrencesOf(PetType.CAT));
         Assert.assertEquals(2, counts.occurrencesOf(PetType.DOG));
         Assert.assertEquals(2, counts.occurrencesOf(PetType.HAMSTER));
@@ -95,7 +95,7 @@ public class Exercise3Test extends PetDomainForKata
         Verify.assertIterableSize(3, lastNamesToPeople.get("Smith"));
 
         // Hint: use the appropriate method on this.people to create a Multimap<String, Person>
-        Multimap<String, Person> byLastNameMultimap = null;
+        Multimap<String, Person> byLastNameMultimap = this.people.groupBy(Person::getLastName);
 
         Verify.assertIterableSize(3, byLastNameMultimap.get("Smith"));
     }
@@ -131,7 +131,7 @@ public class Exercise3Test extends PetDomainForKata
 
         // Hint: use the appropriate method on this.people with a target collection to create a MutableSetMultimap<String, Person>
         // Hint: this.people is a MutableList, so it will return a MutableListMultimap without a target collection
-        MutableSetMultimap<PetType, Person> multimap = null;
+        MutableSetMultimap<PetType, Person> multimap = this.people.groupByEach(Person::getPetTypes, Multimaps.mutable.set.empty());
 
         Verify.assertIterableSize(2, multimap.get(PetType.CAT));
         Verify.assertIterableSize(2, multimap.get(PetType.DOG));
